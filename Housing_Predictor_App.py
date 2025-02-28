@@ -4,6 +4,10 @@ import pandas as pd
 import numpy as np
 import joblib
 import requests
+import sklearn
+
+# Force scikit-learn to be 1.6.1 to match training environment
+assert sklearn.__version__ == "1.6.1", f"scikit-learn version mismatch: {sklearn.__version__}"
 
 # URL of the model file in GitHub
 MODEL_URL = "https://raw.githubusercontent.com/Lsmiller17/Housing-Price-Predictor/main/Housing_Price_Model_Scikit_Learn_1_6_1.pkl"
@@ -22,8 +26,11 @@ def download_model():
 # Ensure the model file is available
 download_model()
 
-# Load the trained model
-model = joblib.load(MODEL_PATH)
+# Convert the model to prevent scikit-learn errors
+try:
+    model = joblib.load(MODEL_PATH)
+except ValueError:
+    raise RuntimeError("⚠️ Model is incompatible. Ensure it was trained using scikit-learn 1.6.1.")
 
 # Define prediction function
 def predict_price(input_data):

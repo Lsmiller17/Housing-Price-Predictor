@@ -6,8 +6,8 @@ import joblib
 import requests
 
 # URL of the model file in GitHub
-MODEL_URL = "https://raw.githubusercontent.com/Lsmiller17/Housing-Price-Predictor/main/Housing_Price_Model_Stable.pkl"
-MODEL_PATH = "Housing_Price_Model_Stable.pkl"
+MODEL_URL = "https://raw.githubusercontent.com/Lsmiller17/Housing-Price-Predictor/main/Housing_Price_Model_Scikit_Learn_1_6_1.pkl"
+MODEL_PATH = "Housing_Price_Model_Scikit_Learn_1_6_1.pkl"
 
 # Function to download the model if it's missing
 def download_model():

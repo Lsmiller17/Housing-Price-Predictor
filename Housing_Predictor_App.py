@@ -5,8 +5,8 @@ import numpy as np
 import joblib
 import requests
 
-# GitHub raw file URL for the model (update the repo name accordingly)
-"MODEL_URL = "https://raw.githubusercontent.com/Lsmiller17/Housing-Price-Predictor/main/Housing_Price_Model_Compatible.pkl"
+# GitHub raw file URL for the model
+MODEL_URL = "https://raw.githubusercontent.com/Lsmiller17/Housing-Price-Predictor/main/Housing_Price_Model_Compatible.pkl"
 
 # Function to download the model if it's missing
 def download_model():

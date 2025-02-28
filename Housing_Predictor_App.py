@@ -5,25 +5,25 @@ import numpy as np
 import joblib
 import requests
 
-# GitHub raw file URL for the model
+# URL of the model file in GitHub
 MODEL_URL = "https://raw.githubusercontent.com/Lsmiller17/Housing-Price-Predictor/main/Housing_Price_Model_Compatible.pkl"
+MODEL_PATH = "Housing_Price_Model_Compatible.pkl"
 
 # Function to download the model if it's missing
 def download_model():
-    response = requests.get(MODEL_URL)
-    if response.status_code == 200:
-        with open("Housing_Price_Model.pkl", "wb") as f:
-            f.write(response.content)
-    else:
-        st.error("⚠️ Unable to download the model. Ensure the GitHub link is correct.")
-        st.stop()
+    if not os.path.exists(MODEL_PATH):
+        response = requests.get(MODEL_URL)
+        if response.status_code == 200:
+            with open(MODEL_PATH, "wb") as f:
+                f.write(response.content)
+        else:
+            raise FileNotFoundError("⚠️ Unable to download the model. Ensure the GitHub link is correct.")
 
-# Ensure model exists
-if not os.path.exists("Housing_Price_Model.pkl"):
-    download_model()
+# Ensure the model file is available
+download_model()
 
 # Load the trained model
-model = joblib.load("Housing_Price_Model.pkl")
+model = joblib.load(MODEL_PATH)
 
 # Define prediction function
 def predict_price(input_data):
